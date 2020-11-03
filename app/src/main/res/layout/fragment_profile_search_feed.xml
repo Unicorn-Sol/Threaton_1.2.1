@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.profile_search_feed">
+    <com.google.android.material.appbar.AppBarLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <androidx.appcompat.widget.Toolbar
+            android:id="@+id/toolbar3"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimaryDark"
+            app:popupTheme="@style/AppTheme.PopupOverlay" >
+            <ImageButton
+                android:theme="@style/AppTheme.Button"
+                android:id="@+id/toolbarButton"
+                android:background="@android:color/black"
+                android:layout_width="40dp"
+                android:src="@drawable/ic_baseline_keyboard_backspace_24"
+                android:layout_height="match_parent"/>
+            <TextView
+                android:id="@+id/textViewForProfileFeed"
+                android:text="@string/explore"
+                android:textAllCaps="true"
+                android:layout_marginStart="30dp"
+                android:gravity="center_vertical"
+                android:textStyle="bold"
+                android:textSize="17sp"
+                android:textColor="@android:color/white"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"/>
+        </androidx.appcompat.widget.Toolbar>
+        <LinearLayout
+            android:background="@android:color/white"
+            android:layout_width="match_parent"
+            android:layout_height="2dp"/>
+
+    </com.google.android.material.appbar.AppBarLayout>
+    <com.theatron2.uiforthreaton.ui.feed.ExoPlayerRecyclerView
+        android:background="@android:color/black"
+        android:id="@+id/recyclerViewForProfileSearchFeed"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+</LinearLayout>

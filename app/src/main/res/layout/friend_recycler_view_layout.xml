@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:id="@+id/layoutForAdmirers"
+    android:orientation="horizontal"
+    android:weightSum="5"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:background="@android:color/black"
+    android:layout_height="60dp">
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:layout_weight="1"
+        android:id="@+id/imageViewForAdmirers"
+        android:layout_marginStart="10dp"
+        android:layout_gravity="center"
+        android:layout_width="30dp"
+        android:src="@drawable/ic_account_circle_black_24dp"
+        android:layout_height="30dp"/>
+    <TextView
+        android:id="@+id/textViewForAdmirers"
+        android:layout_weight="3"
+        android:textColor="@android:color/white"
+        android:text="@string/nameofadmirers"
+        android:gravity="center"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"/>
+    <Switch
+        android:id="@+id/switchForAdmirers"
+        android:layout_weight="1"
+        android:layout_gravity="center_vertical"
+        android:layout_width="50dp"
+        android:layout_height="60dp"
+        android:visibility="invisible"
+        android:enabled="true"
+         />
+</LinearLayout>

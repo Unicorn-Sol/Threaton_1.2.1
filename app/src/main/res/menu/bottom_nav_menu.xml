@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/feed"
+        android:icon="@drawable/ic_view_carousel_black_24dp"
+        android:title="" />
+
+    <item
+        android:id="@+id/search"
+        android:icon="@drawable/ic_search_black_24dp"
+        android:title="" />
+
+
+    <item
+        android:title=""
+        android:id="@+id/friends2"
+        android:icon="@drawable/ic_baseline_person_add_24"
+        />
+    <item
+        android:id="@+id/notifications"
+        android:icon="@drawable/ic_baseline_notifications_none_24"
+        android:title="" />
+    <item
+        android:id="@+id/profile"
+        android:icon="@drawable/ic_account_circle_black_24dp"
+        android:title="" />
+
+</menu>

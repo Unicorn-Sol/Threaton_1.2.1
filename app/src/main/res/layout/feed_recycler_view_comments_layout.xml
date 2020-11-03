@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:id="@+id/layoutForComments"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_height="wrap_content">
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imageViewForComments"
+        android:layout_height="match_parent"
+        android:layout_width="56dp"
+        android:padding="8dp"
+        android:background="@android:color/black"
+        android:src="@drawable/ic_account_circle_black_24dp">
+    </de.hdodenhof.circleimageview.CircleImageView>
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:background="@android:color/black"
+        android:layout_height="wrap_content">
+        <TextView
+            android:layout_marginTop="8dp"
+            android:id="@+id/textViewForComments"
+            android:layout_marginBottom="4dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:text="@string/avisharma"
+            android:textSize="12sp"
+            android:textColor="@android:color/white"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+        <TextView
+            android:textSize="12sp"
+            android:id="@+id/commentsForComments"
+            android:layout_marginStart="8dp"
+            android:layout_marginEnd="8dp"
+            android:textAlignment="viewStart"
+            android:textColor="@android:color/white"
+            android:layout_marginBottom="8dp"
+            android:text="@string/best_advertisement_for_the_best_vehicle_in_town"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"/>
+
+    </LinearLayout>
+</LinearLayout>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@android:color/black"
+    tools:context=".Activities.SignInActivity">
+
+    <!--<com.google.android.material.textview.MaterialTextView
+        android:text="Welcome to Theatron"
+        android:textColor="@android:color/white"
+        android:textSize="26sp"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/card1"
+        android:textStyle="bold"
+        android:layout_marginBottom="72dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>-->
+
+    <com.google.android.material.card.MaterialCardView
+        android:id="@+id/card1"
+        android:layout_width="290dp"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        app:cardCornerRadius="6dp">
+
+        <LinearLayout
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_vertical"
+                android:src="@drawable/ic_google" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/tv_google"
+                android:layout_width="match_parent"
+                android:layout_height="40dp"
+                android:layout_marginStart="16dp"
+                android:background="@android:color/white"
+                android:gravity="center"
+                android:text="@string/login_with_google"
+                android:textColor="@android:color/black"
+                android:textSize="12sp"
+                android:textStyle="bold" />
+
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="290dp"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/card1"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="32sp"
+        app:cardBackgroundColor="#4267b2"
+        app:cardCornerRadius="6dp">
+        <LinearLayout
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:src="@drawable/ic_facebook" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_facebook"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:gravity="center"
+            android:layout_marginStart="16dp"
+            android:text="@string/login_with_facebook"
+            android:textColor="@android:color/white"
+            android:textSize="12sp"
+            android:textStyle="bold" />
+        </LinearLayout>
+    </com.google.android.material.card.MaterialCardView>
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="32dp"
+        android:indeterminateTint="@android:color/holo_blue_light"
+        android:visibility="gone" />
+</RelativeLayout>
+

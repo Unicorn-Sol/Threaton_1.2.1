@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:weightSum="6"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="70dp"
+    android:background="@android:color/black"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+    <de.hdodenhof.circleimageview.CircleImageView
+        android:id="@+id/imageViewForRequest"
+        android:layout_weight="1"
+        android:layout_margin="10dp"
+        android:layout_width="30dp"
+        android:src="@drawable/ic_account_circle_black_24dp"
+        android:layout_height="match_parent"/>
+    <TextView
+        android:id="@+id/textViewForRequests"
+        android:layout_weight="3"
+        android:textColor="@android:color/white"
+        android:text="@string/name"
+        android:gravity="center_vertical"
+        android:textStyle="bold"
+        android:textSize="17sp"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"/>
+
+    <com.google.android.material.button.MaterialButton
+        android:layout_weight="1"
+        android:id="@+id/Accept"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="@string/accept"
+        android:theme="@style/AppTheme"
+        android:textStyle="bold"
+        android:textColor="@android:color/black"
+        android:textAllCaps="false"
+        android:layout_gravity="center"
+        app:cornerRadius="6dp"
+        android:layout_marginEnd="10dp"
+        />
+    <com.google.android.material.button.MaterialButton
+        android:layout_weight="1"
+        android:id="@+id/Decline"
+        android:layout_width="wrap_content"
+        android:layout_height="50dp"
+        android:text="@string/decline"
+        android:theme="@style/AppTheme"
+        android:textStyle="bold"
+        android:layout_gravity="center"
+        android:textColor="@android:color/black"
+        android:textAllCaps="false"
+        app:cornerRadius="6dp"
+        android:layout_marginEnd="10dp"
+        />
+</LinearLayout>

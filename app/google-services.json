@@ -1,0 +1,80 @@
+{
+  "project_info": {
+    "project_number": "456277723625",
+    "firebase_url": "https://theatronfinal.firebaseio.com",
+    "project_id": "theatronfinal",
+    "storage_bucket": "theatronfinal.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:456277723625:android:a92ac80079261763abe378",
+        "android_client_info": {
+          "package_name": "com.theatron2.uiforthreaton"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "456277723625-liemc4rmqmcvu6ji0e1mepcd364901se.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.theatron2.uiforthreaton",
+            "certificate_hash": "c2fa2737408642d80e8977eba87d7847bf017fe9"
+          }
+        },
+        {
+          "client_id": "456277723625-ink0cpbvarh1seuqoenob9lrgtbdo0b2.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.theatron2.uiforthreaton",
+            "certificate_hash": "afff61d62f4d3529ab9111f42aca5639f92868b2"
+          }
+        },
+        {
+          "client_id": "456277723625-0kk6qmtm0j632t6a5jd5ktqos9kdvcvk.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.theatron2.uiforthreaton",
+            "certificate_hash": "8bfa125608809b5221b16094abf0a73fc647e0b8"
+          }
+        },
+        {
+          "client_id": "456277723625-i3podl827k2avrqvlfkqj48n3dkqrj79.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.theatron2.uiforthreaton",
+            "certificate_hash": "cb09846ff50af9fb59402330a7ceec4c23bc48e9"
+          }
+        },
+        {
+          "client_id": "456277723625-epsqh39clcqu9duqc6m9bk78dli9ckqo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyA2J-zTzT6mz5sYaIceDp47p5ue-iNYuD8"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "456277723625-epsqh39clcqu9duqc6m9bk78dli9ckqo.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "456277723625-apntqlf95ntao554ecfnf97n8289fr0i.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.theatron.theatron",
+                "app_store_id": "1507996105"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
