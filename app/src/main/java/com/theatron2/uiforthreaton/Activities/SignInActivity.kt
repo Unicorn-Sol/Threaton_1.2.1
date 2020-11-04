@@ -143,7 +143,7 @@ class SignInActivity : AppCompatActivity() {
                                 myref.child("USER").child(user.uid).child("type").setValue(type)
                             }
                         })
-                    myref.child("USER").addListenerForSingleValueEvent(
+                    myref.child("ALLUSER").addListenerForSingleValueEvent(
                         object : ValueEventListener {
                             override fun onCancelled(p0: DatabaseError) {
                             }
@@ -165,8 +165,8 @@ class SignInActivity : AppCompatActivity() {
                                     arrayListOfUID.add(databaseUserValue["id"]!!)
                                 }
                                 if (!arrayListOfUID.contains(xUser.id)) {
-                                    val key = myref.child("USER").push().key!!
-                                    myref.child("USER").child(key).setValue(xUser)
+                                    val key = myref.child("ALLUSER").push().key!!
+                                    myref.child("ALLUSER").child(key).setValue(xUser)
                                 }
                             }
                         }
@@ -213,7 +213,7 @@ class SignInActivity : AppCompatActivity() {
                             myref.child("USER").child(user.uid).child("type").setValue(type)
                         }
                     })
-                    myref.child("USER").addListenerForSingleValueEvent(
+                    myref.child("ALLUSER").addListenerForSingleValueEvent(
                         object:ValueEventListener
                         {
                             override fun onCancelled(p0: DatabaseError) {
@@ -228,8 +228,8 @@ class SignInActivity : AppCompatActivity() {
                                     arrayListOfUID.add(databaseUserValue["id"]!!)
                                 }
                                 if(!arrayListOfUID.contains(xUser.id)){
-                                    val key = myref.child("USER").push().key!!
-                                    myref.child("USER").child(key).setValue(xUser)
+                                    val key = myref.child("ALLUSER").push().key!!
+                                    myref.child("ALLUSER").child(key).setValue(xUser)
                                 }
                             }
 

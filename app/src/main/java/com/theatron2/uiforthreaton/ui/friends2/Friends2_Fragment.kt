@@ -8,6 +8,7 @@ import android.os.Build
 import android.os.Bundle
 import android.provider.ContactsContract
 import android.telephony.TelephonyManager
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -164,17 +165,28 @@ class Friends2_Fragment : Fragment() {
     {
 
         myRef.child("USER").addListenerForSingleValueEvent(
-            object:ValueEventListener
-            {
+            object : ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {}
 
                 override fun onDataChange(p0: DataSnapshot) {
-                    for(arrayList in p0.children)
-                    {
-                        val databaseUser = arrayList.value as HashMap<String,String>
-                        listContactsFromFirebase.add(user_with_id_phoneNumber(databaseUser["name"]!!,databaseUser["photo"]!!,databaseUser["id"]!!,databaseUser["phonenumber"]!!))
+                    try {
+
+                    for (arrayList in p0.children) {
+                        val databaseUser = arrayList.value as HashMap<String, String>
+                        Log.e("Friends 2 fragment", arrayList.value.toString() )
+                        Log.e("Friends 2 fragment", arrayList.toString() )
+                        listContactsFromFirebase.add(
+                            user_with_id_phoneNumber(
+                                databaseUser["name"]!!,
+                                databaseUser["photourl"]!!,
+                                arrayList.key!!,
+                                databaseUser["phonenumber"]!!
+                            )
+                        )
+                    }}catch (e:Exception){
+                        e.printStackTrace()
                     }
-                    if(currentUser!=null) {
+                    if (currentUser != null) {
                         myRef.child("USER").child(currentUser!!).child("friendrns")
                             .addListenerForSingleValueEvent(
                                 object : ValueEventListener {
@@ -183,8 +195,17 @@ class Friends2_Fragment : Fragment() {
                                     override fun onDataChange(p0: DataSnapshot) {
                                         if (p0.exists()) {
                                             for (databaseList in p0.children) {
-                                                val databaseUser = databaseList.value as HashMap<String, String>
-                                                arrayListOfSent.add(RequestTypeData(databaseUser["name"]!!, databaseUser["photo"]!!, databaseUser["id"]!!, databaseUser["phonenumber"]!!, databaseUser["type"]!!))
+                                                val databaseUser =
+                                                    databaseList.value as HashMap<String, String>
+                                                arrayListOfSent.add(
+                                                    RequestTypeData(
+                                                        databaseUser["name"]!!,
+                                                        databaseUser["photo"]!!,
+                                                        databaseUser["id"]!!,
+                                                        databaseUser["phonenumber"]!!,
+                                                        databaseUser["type"]!!
+                                                    )
+                                                )
                                             }
                                         }
                                         setAdapterAndNotify()
@@ -263,7 +284,7 @@ class Friends2_Fragment : Fragment() {
             "-1"
         }
 
-        myRef.child("USER").addListenerForSingleValueEvent(object : ValueEventListener {
+        myRef.child("ALLUSER").addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onCancelled(p0: DatabaseError) {
             }
 

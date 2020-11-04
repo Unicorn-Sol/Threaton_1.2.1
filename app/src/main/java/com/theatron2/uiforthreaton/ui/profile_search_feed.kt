@@ -77,6 +77,9 @@ class profile_search_feed() : Fragment() {
         }
 
         for (i in temporaryList) {
+//            if (i.view =="null"){
+//                i.view = "0"
+//            }
             feedList.add(UserFeed(false, i.photo, i.name, i.url, i.view.toInt(), i.likes.toInt(), i.dislikes.toInt(), i.shares.toInt(), LikedORNot = false, DislikedOrNot = false, Title = i.title, details = i.desc, arrayOfComments = arrayListOf(), id = i.id, vnum = i.vnum, thumbnail = i.thumbnailphoto,date = i.date,time = i.time))
         }
         recyclerView = view.findViewById(R.id.recyclerViewForProfileSearchFeed)

@@ -28,6 +28,7 @@ class SearchFragment : Fragment() {
     val myRef = FirebaseDatabase.getInstance().reference
     val namesList = ArrayList<USER_FRIEND_ADMIRERS>()
     var gridList = ArrayList<ProfileUser>()
+    var vnum = 0
     override fun onCreateView(
         inflater: LayoutInflater,
         container: ViewGroup?,
@@ -44,7 +45,7 @@ class SearchFragment : Fragment() {
         val adapter = CustomAdapterForSearchGrid(requireContext(), gridList)
         recyclerViewForSearchFrag.adapter = adapter
 
-        myRef.child("USER").addListenerForSingleValueEvent(
+        myRef.child("ALLUSER").addListenerForSingleValueEvent(
             object : ValueEventListener {
                 override fun onCancelled(error: DatabaseError) {}
 
@@ -82,7 +83,7 @@ class SearchFragment : Fragment() {
                                                         "video LIst fetched",
                                                         videoListFetched.size.toString()
                                                     )
-                                                    try {
+
                                                         Log.e(
                                                             "loop Inside",
                                                             videoListFetched[i.toString()].toString()
@@ -113,9 +114,6 @@ class SearchFragment : Fragment() {
                                                         ) {
                                                             gridList.add(proUser)
                                                         }
-                                                    } catch (e: Exception) {
-                                                        e.printStackTrace()
-                                                    }
                                                 }
                                             } else {
                                                 val videoListFetched =
@@ -126,13 +124,55 @@ class SearchFragment : Fragment() {
                                                         "video LIst fetched",
                                                         videoListFetched.size.toString()
                                                     )
-                                                    try {
-                                                        Log.e(
-                                                            "loop Inside",
-                                                            videoListFetched[i].toString()
-                                                        )
+
+                                                     //   Log.e("loop Inside", videoListFetched[i].toString())
                                                         val databaseUser =
                                                             videoListFetched[i] as HashMap<String, String>
+                                                    if (databaseUser["thumbnailphoto"].isNullOrEmpty()){
+                                                        databaseUser["thumbnailphoto"] = "https://www.pngkit.com/png/full/267-2678423_bacteria-video-thumbnail-default.png"
+                                                    }
+                                                    if (databaseUser["photo"].isNullOrEmpty()){
+                                                        databaseUser["photo"] = "https://www.ibts.org/wp-content/uploads/2017/08/iStock-476085198.jpg"
+                                                    }
+                                                    //todo : default date need to be changed. time tooo. name too
+                                                    if(databaseUser["date"].isNullOrEmpty()){
+                                                        databaseUser["date"] = "no date"
+                                                    }
+                                                    if(databaseUser["time"].isNullOrEmpty()){
+                                                        databaseUser["time"] = "no time"
+                                                    }
+                                                    if(databaseUser["name"].isNullOrEmpty()){
+                                                        databaseUser["name"] = "no name"
+                                                    }
+                                                    if(databaseUser["title"].isNullOrEmpty()){
+                                                        databaseUser["title"] = "no title"
+                                                    }
+                                                    if(databaseUser["url"].isNullOrEmpty()){
+                                                        databaseUser["url"] = "https://firebasestorage.googleapis.com/v0/b/theatronfinal.appspot.com/o/videos%2FmN8VTp8QxmT1bD5Th9s0b5MahjQ23.mp4?alt=media&token=6d582c9a-4a09-4ad8-8111-528dde677f54"
+                                                    }
+                                                    if(databaseUser["id"].isNullOrEmpty()){
+                                                        //id of marco pilloni, Ios developer
+                                                        databaseUser["id"] = "mMr3YSDUlhXXCsyiHIs95L1klMc2"
+                                                    }
+                                                    if(databaseUser["desc"].isNullOrEmpty()){
+                                                        databaseUser["desc"] = "no description"
+                                                    }
+                                                    if (databaseUser["vnum"].isNullOrEmpty()){
+                                                        databaseUser["vnum"] = (vnum+1).toString()
+                                                    }
+                                                    vnum = databaseUser["vnum"]!!.toInt()
+                                                    if(databaseUser["view"].toString().isEmpty()||databaseUser["view"].toString()=="null"){
+                                                        databaseUser["view"] = "0"
+                                                    }
+                                                    if(databaseUser["likes"].toString().isNullOrEmpty()||databaseUser["view"].toString()=="null"){
+                                                        databaseUser["likes"] = "0"
+                                                    }
+                                                    if(databaseUser["dislikes"].toString().isNullOrEmpty()||databaseUser["view"].toString()=="null"){
+                                                        databaseUser["dislikes"] = "0"
+                                                    }
+                                                    if(databaseUser["shares"].toString().isNullOrEmpty()||databaseUser["view"].toString()=="null"){
+                                                        databaseUser["shares"] = "0"
+                                                    }
                                                         val proUser = ProfileUser(
                                                             databaseUser["name"]!!,
                                                             databaseUser["title"]!!,
@@ -140,16 +180,17 @@ class SearchFragment : Fragment() {
                                                             databaseUser["thumbnailphoto"]!!,
                                                             databaseUser["id"]!!,
                                                             databaseUser["desc"]!!,
-                                                            databaseUser["view"]!!,
-                                                            databaseUser["likes"]!!,
-                                                            databaseUser["dislikes"]!!,
-                                                            databaseUser["shares"]!!,
+                                                            databaseUser["view"].toString()!!,
+                                                            databaseUser["likes"].toString()!!,
+                                                            databaseUser["dislikes"].toString()!!,
+                                                            databaseUser["shares"].toString()!!,
                                                             databaseUser["photo"]!!,
                                                             databaseUser["vnum"]!!,
                                                             databaseUser["date"]!!,
                                                             databaseUser["time"]!!,
                                                             ""
                                                         )
+
                                                         if (databaseUser["status"].equals(
                                                                 "approved",
                                                                 false
@@ -157,8 +198,6 @@ class SearchFragment : Fragment() {
                                                         ) {
                                                             gridList.add(proUser)
                                                         }
-                                                    } catch (e: Exception) {
-                                                        e.printStackTrace()
                                                     }
                                                 }
                                             }
@@ -166,7 +205,7 @@ class SearchFragment : Fragment() {
                                             gridList.shuffle()
                                             adapter!!.notifyDataSetChanged()
                                         }
-                                    }
+
 
                                 }
 
@@ -200,7 +239,7 @@ class SearchFragment : Fragment() {
             CustomSuggestionsAdapterSearchFrag(requireContext(), layoutInflater)
         customAdapterSuggestion.suggestions = namesList
         searchBarForSearch.setCustomSuggestionAdapter(customAdapterSuggestion)
-        myRef.child("USER").addValueEventListener(
+        myRef.child("ALLUSER").addValueEventListener(
             object : ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {}
 

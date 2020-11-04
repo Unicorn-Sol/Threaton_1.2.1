@@ -67,6 +67,8 @@ class Main2Activity : AppCompatActivity() {
             myRef_user_userId.addValueEventListener(object : ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {}
                 override fun onDataChange(p0: DataSnapshot) {
+                    try {
+
                     name = p0.child("name").value.toString()
                     photoUrl = p0.child("photourl").value.toString()
                     val shareCount = p0.child("sharescount").value.toString()
@@ -88,6 +90,9 @@ class Main2Activity : AppCompatActivity() {
 //                if(admirerscount!=null) {
 //                    admirerscount.text = getStringFormLikes(followCount.toInt())
 //                }
+                }catch (e:Exception){
+                        e.printStackTrace()
+                    }
                 }
             })
 

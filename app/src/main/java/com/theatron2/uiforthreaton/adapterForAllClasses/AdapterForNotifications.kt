@@ -36,9 +36,6 @@ class AdapterForNotifications() : RecyclerView.Adapter<AdapterForNotifications.M
     override fun getItemCount() =  myList.size
 
     fun setData(newList: List<HashMap<String, String>>){
-        map["title"] = "lavda lassang"
-        map["body"] = "lavda lassang"
-        map["time"] = "lavda lassang"
         Log.e("adapter", "setData: called ", )
         myList = newList
         notifyDataSetChanged()

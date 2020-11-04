@@ -97,11 +97,11 @@ class FriendFragment : Fragment() {
         )
 
         ////
-        myRef.child("USER").addListenerForSingleValueEvent(
+        myRef.child("ALLUSER").addListenerForSingleValueEvent(
             object :ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {}
                 override fun onDataChange(p0: DataSnapshot) {
-                    myRef.child("USER").keepSynced(true)
+                    myRef.child("ALLUSER").keepSynced(true)
                     if (p0.exists()) {
                         val mapOfUser = p0.value as ArrayList<user_with_id>
                         for (i in 0 until mapOfUser.size) {
@@ -233,11 +233,11 @@ class FriendFragment : Fragment() {
         )
 
         //
-        myRef.child("USER").addListenerForSingleValueEvent(
+        myRef.child("ALLUSER").addListenerForSingleValueEvent(
             object :ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {}
                 override fun onDataChange(p0: DataSnapshot) {
-                    myRef.child("USER").keepSynced(true)
+                    myRef.child("ALLUSER").keepSynced(true)
                     if (p0.exists()) {
                         val mapOfUser = p0.value as ArrayList<user_with_id>
                         for (i in 0 until mapOfUser.size) {
