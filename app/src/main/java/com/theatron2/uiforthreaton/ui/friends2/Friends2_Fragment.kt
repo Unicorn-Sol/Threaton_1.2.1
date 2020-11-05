@@ -169,23 +169,32 @@ class Friends2_Fragment : Fragment() {
                 override fun onCancelled(p0: DatabaseError) {}
 
                 override fun onDataChange(p0: DataSnapshot) {
-                    try {
 
                     for (arrayList in p0.children) {
-                        val databaseUser = arrayList.value as HashMap<String, String>
+                        val databaseUser = arrayList.value as HashMap<String, Any>
                         Log.e("Friends 2 fragment", arrayList.value.toString() )
                         Log.e("Friends 2 fragment", arrayList.toString() )
+                        if(databaseUser["name"]== null){
+                            databaseUser["name"] = "no name"
+                        }
+                        if(databaseUser["phonenumber"]== null){
+                            databaseUser["phonenumber"] = "-1"
+                        }
+                        if (databaseUser["photourl"] == null){
+                            databaseUser["photourl"] = "https://www.ibts.org/wp-content/uploads/2017/08/iStock-476085198.jpg"
+                        }
                         listContactsFromFirebase.add(
                             user_with_id_phoneNumber(
-                                databaseUser["name"]!!,
-                                databaseUser["photourl"]!!,
+                                databaseUser["name"]!!.toString(),
+                                databaseUser["photourl"]!!.toString(),
                                 arrayList.key!!,
-                                databaseUser["phonenumber"]!!
+                                databaseUser["phonenumber"]!!.toString()
                             )
                         )
-                    }}catch (e:Exception){
-                        e.printStackTrace()
                     }
+//                }catch (e:Exception){
+//                        e.printStackTrace()
+//                    }
                     if (currentUser != null) {
                         myRef.child("USER").child(currentUser!!).child("friendrns")
                             .addListenerForSingleValueEvent(

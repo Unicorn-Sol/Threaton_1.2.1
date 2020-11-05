@@ -158,7 +158,7 @@ class FeedFragment : Fragment() {
                                                     if (p0.exists()) {
                                                         myRef.child("USER").child(admiringList[i])
                                                             .child("videolist").keepSynced(true)
-                                                        try {
+                                                       // try {
 
                                                         if(p0.value is HashMap<*,*>){
                                                             val arrayList =
@@ -207,26 +207,58 @@ class FeedFragment : Fragment() {
                                                             for (j in 0 until arrayList.size) {
                                                                 if (arrayList[j] != null) {
                                                                     val databaseUser =
-                                                                        arrayList[j] as HashMap<String, String>
+                                                                        arrayList[j] as HashMap<String, Any>
+
+                                                                    if (databaseUser["photo"] == null){
+                                                                        databaseUser["photo"] = "https://www.ibts.org/wp-content/uploads/2017/08/iStock-476085198.jpg"
+                                                                    }
+                                                                    if(databaseUser["name"]== null){
+                                                                        databaseUser["name"] = "no name"
+                                                                    }
+                                                                    if(databaseUser["url"] == null){
+                                                                        databaseUser["url"] = "https://firebasestorage.googleapis.com/v0/b/theatronfinal.appspot.com/o/videos%2FmN8VTp8QxmT1bD5Th9s0b5MahjQ23.mp4?alt=media&token=6d582c9a-4a09-4ad8-8111-528dde677f54"
+                                                                    }
+                                                                    if(databaseUser["view"].toString().isEmpty()||databaseUser["view"].toString()=="null"){
+                                                                        databaseUser["view"] = 0.toString()
+                                                                    }
+                                                                    if(databaseUser["likes"].toString().isNullOrEmpty()||databaseUser["view"].toString()=="null"){
+                                                                        databaseUser["likes"] = "0"
+                                                                    }
+                                                                    if(databaseUser["dislikes"].toString().isNullOrEmpty()||databaseUser["view"].toString()=="null"){
+                                                                        databaseUser["dislikes"] = "0"
+                                                                    }
+                                                                    if(databaseUser["shares"].toString().isNullOrEmpty()||databaseUser["view"].toString()=="null"){
+                                                                        databaseUser["shares"] = "0"
+                                                                    }
+                                                                    if (databaseUser["thumbnailphoto"]==null){
+                                                                        databaseUser["thumbnailphoto"] = "https://www.pngkit.com/png/full/267-2678423_bacteria-video-thumbnail-default.png"
+                                                                    }
+                                                                    if(databaseUser["date"]==null){
+                                                                        databaseUser["date"] = "2020-01-12"
+                                                                    }
+                                                                    if(databaseUser["time"]==null){
+                                                                        databaseUser["time"] = "10:10:55"
+                                                                    }
                                                                     val feedUserForTemp = UserFeed(
                                                                         false,
-                                                                        databaseUser["photo"]!!,
-                                                                        databaseUser["name"]!!,
-                                                                        databaseUser["url"]!!,
-                                                                        databaseUser["view"]!!.toInt(),
-                                                                        databaseUser["likes"]!!.toInt(),
-                                                                        databaseUser["dislikes"]!!.toInt(),
-                                                                        databaseUser["shares"]!!.toInt(),
+
+                                                                        databaseUser["photo"]!!.toString(),
+                                                                        databaseUser["name"]!!.toString(),
+                                                                        databaseUser["url"]!!.toString(),
+                                                                        databaseUser["view"]!!.toString().toInt(),
+                                                                        databaseUser["likes"]!!.toString().toInt(),
+                                                                        databaseUser["dislikes"]!!.toString().toInt(),
+                                                                        databaseUser["shares"]!!.toString().toInt(),
                                                                         LikedORNot = false,
                                                                         DislikedOrNot = false,
-                                                                        Title = databaseUser["title"]!!,
-                                                                        details = databaseUser["desc"]!!,
+                                                                        Title = databaseUser["title"]!!.toString(),
+                                                                        details = databaseUser["desc"]!!.toString(),
                                                                         arrayOfComments = commentsList,
-                                                                        id = databaseUser["id"]!!,
-                                                                        vnum = databaseUser["vnum"]!!,
-                                                                        thumbnail = databaseUser["thumbnailphoto"]!!,
-                                                                        date = databaseUser["date"]!!,
-                                                                        time = databaseUser["time"]!!
+                                                                        id = databaseUser["id"]!!.toString(),
+                                                                        vnum = databaseUser["vnum"]!!.toString(),
+                                                                        thumbnail = databaseUser["thumbnailphoto"]!!.toString(),
+                                                                        date = databaseUser["date"]!!.toString(),
+                                                                        time = databaseUser["time"]!!.toString()
                                                                     )
                                                                     if(databaseUser!=null && feedUserForTemp !in feedList)
                                                                     {
@@ -242,9 +274,10 @@ class FeedFragment : Fragment() {
                                                                 )
                                                                 adapter!!.notifyDataSetChanged()
                                                             }
-                                                        }}catch (e:Exception){
-                                                            e.printStackTrace()
                                                         }
+//                                                        }catch (e:Exception){
+//                                                            e.printStackTrace()
+//                                                        }
 
                                                     }
                                                 }

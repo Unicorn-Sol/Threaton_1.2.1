@@ -136,10 +136,10 @@ class SearchFragment : Fragment() {
                                                     }
                                                     //todo : default date need to be changed. time tooo. name too
                                                     if(databaseUser["date"].isNullOrEmpty()){
-                                                        databaseUser["date"] = "no date"
+                                                        databaseUser["date"] = "2020-01-12"
                                                     }
                                                     if(databaseUser["time"].isNullOrEmpty()){
-                                                        databaseUser["time"] = "no time"
+                                                        databaseUser["time"] =  "10:10:55"
                                                     }
                                                     if(databaseUser["name"].isNullOrEmpty()){
                                                         databaseUser["name"] = "no name"

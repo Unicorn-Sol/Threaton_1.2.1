@@ -150,7 +150,7 @@ class PlayerViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
                     override fun onDataChange(p0: DataSnapshot) {
                         if (p0.exists()) {
 //                            commentsList=ArrayList()
-                            try {
+                          //  try {
                                 for (i in p0.children) {
 
                                     val commentUserForData = i.value as HashMap<String, String>
@@ -185,9 +185,9 @@ class PlayerViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
                                             }
                                         )
                                 }
-                            } catch (e: Exception) {
-                                e.printStackTrace()
-                            }
+//                            } catch (e: Exception) {
+//                                e.printStackTrace()
+//                            }
                         }
                     }
                 }

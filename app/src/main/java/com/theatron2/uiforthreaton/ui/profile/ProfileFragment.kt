@@ -267,7 +267,7 @@ class ProfileFragment : Fragment() {
                             if (p0.exists()) {
                                 //myRef.child("USER").child(mAuth.currentUser!!.uid).child("videolist").keepSynced(true)
                                 val arrayList = p0.value as ArrayList<ProfileUser>
-                                try{
+                                //try{
                                 for (i in 0 until arrayList.size) {
                                     if (arrayList[i] != null) {
                                         val databaseUser = arrayList[i] as HashMap<String, String>
@@ -294,10 +294,11 @@ class ProfileFragment : Fragment() {
 
                                         countOfShares += databaseUser["shares"]!!.toInt()
                                     }
-                                }}
-                                catch(e:Exception){
-                                    e.printStackTrace()
                                 }
+//                                }
+//                                catch(e:Exception){
+//                                    e.printStackTrace()
+//                                }
                                 adapter.notifyDataSetChanged()
 
                             }
