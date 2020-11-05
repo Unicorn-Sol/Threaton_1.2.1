@@ -6,17 +6,13 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.theatron2.uiforthreaton.R
+import com.theatron2.uiforthreaton.db.notification_db.Notification
 import kotlinx.android.synthetic.main.notification_cell.view.*
 
 
-class AdapterForNotifications() : RecyclerView.Adapter<AdapterForNotifications.MyViewHolder>(){
-
-    //private var myList = emptyList<HashMap<String, String>>()
-    val map =   hashMapOf<String, String>(
-    )
+class AdapterForNotifications(val myList : List<Notification>) : RecyclerView.Adapter<AdapterForNotifications.MyViewHolder>(){
 
 
-    private var myList :List<HashMap<String, String>> = listOf(map)
     class MyViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView)
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -24,21 +20,18 @@ class AdapterForNotifications() : RecyclerView.Adapter<AdapterForNotifications.M
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        val item = map
-        Log.e("adapter", "onBindViewHolder: ${item["title"]}" )
-        Log.e("adapter", "onBindViewHolder: ${item["body"]}" )
-        Log.e("adapter", "onBindViewHolder: ${item["time"]}" )
-        holder.itemView.notification_title_tv.text = item["title"]
-        holder.itemView.notification_body_tv.text = item["body"]
-        holder.itemView.notification_time_tv.text = item["time"]
+    val item = myList[position]
+        holder.itemView.notification_title_tv.text = item.title
+        holder.itemView.notification_body_tv.text = item.body
+        holder.itemView.notification_time_tv.text = item.time
     }
 
     override fun getItemCount() =  myList.size
 
-    fun setData(newList: List<HashMap<String, String>>){
-        Log.e("adapter", "setData: called ", )
-        myList = newList
-        notifyDataSetChanged()
-        notifyDataSetChanged()
-    }
+//    fun setData(newList: List<Notification>){
+//        Log.e("adapter", "setData: called ", )
+//        myList = newList
+//        notifyDataSetChanged()
+//        notifyDataSetChanged()
+//    }
 }

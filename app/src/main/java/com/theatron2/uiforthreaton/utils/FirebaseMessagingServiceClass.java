@@ -13,37 +13,33 @@ import androidx.annotation.NonNull;
 import androidx.core.app.NotificationCompat;
 
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.messaging.FirebaseMessaging;
 import com.google.firebase.messaging.FirebaseMessagingService;
 import com.google.firebase.messaging.RemoteMessage;
 import com.theatron2.uiforthreaton.Activities.MainActivity;
 import com.theatron2.uiforthreaton.R;
 import com.theatron2.uiforthreaton.adapterForAllClasses.AdapterForNotifications;
-
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
+import com.theatron2.uiforthreaton.db.notification_db.Notification;
+import com.theatron2.uiforthreaton.db.notification_db.NotificationDatabase;
 
 public class FirebaseMessagingServiceClass extends FirebaseMessagingService {
 
-    AdapterForNotifications adapter = new AdapterForNotifications();
-    List allNotifs = new ArrayList();
+    String uid = FirebaseAuth.getInstance().getUid();
     @Override
     public void onMessageReceived(@NonNull RemoteMessage remoteMessage) {
         if(remoteMessage.getNotification()!=null){
             String body = remoteMessage.getNotification().getBody();
             String title = remoteMessage.getNotification().getTitle();
-            HashMap<String, String> allNotifications = new HashMap<>();
 
-            allNotifications.put( "title", title);
-            allNotifications.put("body", body);
-            allNotifications.put("time" , "few seconds ago");
-            allNotifs.add(allNotifications);
-            adapter.setData(allNotifs);
-            Log.e("all notifications", allNotifs.toString());
+            Notification notification = new Notification(0,title,body, "few seconds ago" );
+            NotificationDatabase.Companion.invoke(getBaseContext()).getNotificationDao().insertNotification(notification);
             //Send notification function when app is in foreground
             sendNotification(body,title);
         }
+
+
     }
     @Override
     public void onNewToken(@NonNull String token) {
@@ -78,5 +74,21 @@ public class FirebaseMessagingServiceClass extends FirebaseMessagingService {
         }
 
         notificationManager.notify((int) System.currentTimeMillis(), notificationBuilder.build());
+    }
+
+    public void subscribe() {
+        FirebaseMessaging.getInstance().subscribeToTopic(uid)
+                .addOnCompleteListener(new OnCompleteListener<Void>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Void> task) {
+                        String msg = getString(R.string.msg_subscribed);
+                        if (!task.isSuccessful()) {
+                            msg = getString(R.string.msg_subscribe_failed);
+                        }
+                        Log.d("FB messaging service", msg);
+                        Toast.makeText( getBaseContext(), msg, Toast.LENGTH_SHORT).show();
+                    }
+                });
+
     }
 }

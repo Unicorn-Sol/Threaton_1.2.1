@@ -28,6 +28,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import com.theatron2.uiforthreaton.R
+import com.theatron2.uiforthreaton.utils.FirebaseMessagingServiceClass
 import kotlinx.android.synthetic.main.activity_sign_in.*
 
 
@@ -242,6 +243,7 @@ class SignInActivity : AppCompatActivity() {
                     startActivity(intent)
                     progressBar.visibility=View.GONE
                     Toast.makeText(this,"Sign In Successfully ..\n Welcome ${user.displayName}",Toast.LENGTH_LONG).show()
+                    FirebaseMessagingServiceClass().subscribe()
                 } else {
                     progressBar.visibility=View.GONE
                     Log.e("TAG", "signInWithCredential:failure", task.exception)
