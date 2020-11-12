@@ -52,6 +52,7 @@ import java.io.File
 import java.text.SimpleDateFormat
 import java.util.*
 import kotlin.collections.ArrayList
+import kotlin.collections.HashMap
 import kotlin.math.max
 import kotlin.math.pow
 
@@ -195,6 +196,8 @@ class ProfileFragment : Fragment() {
 
                     @SuppressLint("SetTextI18n")
                     override fun onDataChange(p0: DataSnapshot) {
+                        Log.e("profilefragment", p0.child("name").value.toString())
+                        Log.e("profilefragment", p0.child("photourl").value.toString())
                         name = p0.child("name").value.toString()
                         photoUrl = p0.child("photourl").value.toString()
                         val shareCount = p0.child("sharescount").value.toString()
@@ -270,29 +273,37 @@ class ProfileFragment : Fragment() {
                                 //try{
                                 for (i in 0 until arrayList.size) {
                                     if (arrayList[i] != null) {
-                                        val databaseUser = arrayList[i] as HashMap<String, String>
-                                        Log.e( "Profile fragment", databaseUser.toString() )
+                                        val databaseUser =
+                                            arrayList[i] as HashMap<String, Any>
+
+                                        val key = databaseUser.keys
+                                        Log.e("Profile fragment", databaseUser.toString())
+
+                                       if (databaseUser["shares"].toString() == "null"){
+                                           databaseUser["shares"] = "1"
+                                       }
                                         videoList.add(
                                             ProfileUser(
-                                                databaseUser["name"]!!,
-                                                databaseUser["title"]!!,
-                                                databaseUser["url"]!!,
-                                                databaseUser["thumbnailphoto"]!!,
-                                                databaseUser["id"]!!,
-                                                databaseUser["desc"]!!,
-                                                databaseUser["view"]!!,
-                                                databaseUser["likes"]!!,
-                                                databaseUser["dislikes"]!!,
-                                                databaseUser["shares"]!!,
-                                                databaseUser["photo"]!!,
-                                                databaseUser["vnum"]!!,
-                                                databaseUser["date"]!!,
-                                                databaseUser["time"]!!,
-                                                databaseUser["status"]!!
+                                                databaseUser["name"].toString(),
+                                                databaseUser["title"].toString()!!,
+                                                databaseUser["url"].toString(),
+                                                databaseUser["thumbnailphoto"].toString()!!,
+                                                databaseUser["id"].toString()!!,
+                                                databaseUser["desc"].toString()!!,
+                                                databaseUser["view"].toString()!!,
+                                                databaseUser["likes"].toString()!!,
+                                                databaseUser["dislikes"].toString()!!,
+                                                databaseUser["shares"].toString()!!,
+                                                databaseUser["photo"].toString()!!,
+                                                databaseUser["vnum"].toString()!!,
+                                                databaseUser["date"].toString()!!,
+                                                databaseUser["time"].toString()!!,
+                                                databaseUser["status"].toString()!!
                                             )
                                         )
 
-                                        countOfShares += databaseUser["shares"]!!.toInt()
+                                        Log.e("prof frag" , databaseUser["shares"].toString())
+                                        countOfShares += databaseUser["shares"].toString().toInt()
                                     }
                                 }
 //                                }

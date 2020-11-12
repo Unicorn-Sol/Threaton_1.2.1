@@ -6,10 +6,13 @@ import android.annotation.SuppressLint
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.PagerSnapHelper
 import androidx.recyclerview.widget.RecyclerView
@@ -43,11 +46,19 @@ class FeedFragment : Fragment() {
     val myRef=FirebaseDatabase.getInstance().reference
     val mAuth = FirebaseAuth.getInstance()
     var currentVisiblePosition: Long = 0
+    lateinit var tokenForApp : MutableLiveData<String>
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.fragment_feed, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        tokenForApp.observe(viewLifecycleOwner, {
+            tokenForApp.value = it
+        })
+        val shit = FirebaseAuth.getInstance().currentUser?.getIdToken(true)
+       shit!!.addOnSuccessListener {
+           Log.e( "feedFragment",  it.token.toString())
+       }
         val admiringList=ArrayList<String>()
         recyclerView=view.findViewById(R.id.recyclerViewForFeed)
         recyclerView.layoutManager = LinearLayoutManager(context, RecyclerView.HORIZONTAL, false)

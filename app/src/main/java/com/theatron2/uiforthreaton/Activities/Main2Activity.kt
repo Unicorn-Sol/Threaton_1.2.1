@@ -43,6 +43,7 @@ class Main2Activity : AppCompatActivity() {
     var username:String=""
     var name:String=""
     var countOfShares:Int=0
+    var vnum = 0
     @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -67,32 +68,38 @@ class Main2Activity : AppCompatActivity() {
             myRef_user_userId.addValueEventListener(object : ValueEventListener {
                 override fun onCancelled(p0: DatabaseError) {}
                 override fun onDataChange(p0: DataSnapshot) {
-                    try {
-
+                    // try {
+                    Log.e(" Main2 activity snap", p0.toString())
+                    Log.e(" Main2 activity name", p0.child("name").toString())
                     name = p0.child("name").value.toString()
                     photoUrl = p0.child("photourl").value.toString()
                     val shareCount = p0.child("sharescount").value.toString()
+                    Log.e(" Main2 activ sharec", shareCount)
                     val followCount = p0.child("admirerscount").value.toString()
                     if (profile_name != null) {
                         profile_name.text = name
                     }
                     if (user_name != null) {
-                        user_name.text = "@"+name.toLowerCase(Locale.ROOT).replace(" ", "")
+                        user_name.text = "@" + name.toLowerCase(Locale.ROOT).replace(" ", "")
                     }
                     if (profile_image != null) {
                         Picasso.get().load(photoUrl)
                             .placeholder(R.drawable.ic_account_circle_black_24dp)
                             .into(profile_image)
                     }
+                    if (shareCount == "null") {
+                        sharecount.text = getStringFormLikes(0)
+                    }
                     if (sharecount != null) {
                         sharecount.text = getStringFormLikes(shareCount.toInt())
                     }
+
 //                if(admirerscount!=null) {
 //                    admirerscount.text = getStringFormLikes(followCount.toInt())
 //                }
-                }catch (e:Exception){
-                        e.printStackTrace()
-                    }
+//                }catch (e:Exception){
+//                        e.printStackTrace()
+//                    }
                 }
             })
 
@@ -103,35 +110,81 @@ class Main2Activity : AppCompatActivity() {
 
                         override fun onDataChange(p0: DataSnapshot) {
                             if (p0.exists()) {
-                                try {
+                                //try {
 
-                                    for (arrayList in p0.children) {
+                                for (arrayList in p0.children) {
 
-                                        val databaseUser =
-                                            arrayList.value as HashMap<String, String>
-                                        videoList.add(
-                                            ProfileUser(
-                                                databaseUser["name"]!!,
-                                                databaseUser["title"]!!,
-                                                databaseUser["url"]!!,
-                                                databaseUser["thumbnailphoto"]!!,
-                                                databaseUser["id"]!!,
-                                                databaseUser["desc"]!!,
-                                                databaseUser["view"]!!,
-                                                databaseUser["likes"]!!,
-                                                databaseUser["dislikes"]!!,
-                                                databaseUser["shares"]!!,
-                                                databaseUser["photo"]!!,
-                                                databaseUser["vnum"]!!,
-                                                databaseUser["date"]!!,
-                                                databaseUser["time"]!!
-                                            )
-                                        )
-                                        countOfShares += databaseUser["shares"]!!.toInt()
+                                    val databaseUser =
+                                        arrayList.value as HashMap<String, String>
+                                    Log.e( "Main 2 activity",arrayList.value.toString() )
+
+                                    if (databaseUser["thumbnailphoto"].isNullOrEmpty()){
+                                        databaseUser["thumbnailphoto"] = "https://www.pngkit.com/png/full/267-2678423_bacteria-video-thumbnail-default.png"
                                     }
-                                }catch (e:Exception){
-                                    e.printStackTrace()
+                                    if (databaseUser["photo"].isNullOrEmpty()){
+                                        databaseUser["photo"] = "https://www.ibts.org/wp-content/uploads/2017/08/iStock-476085198.jpg"
+                                    }
+                                    if(databaseUser["date"].isNullOrEmpty()){
+                                        databaseUser["date"] = "2020-01-12"
+                                    }
+                                    if(databaseUser["time"].isNullOrEmpty()){
+                                        databaseUser["time"] =  "10:10:55"
+                                    }
+                                    if(databaseUser["name"].isNullOrEmpty()){
+                                        databaseUser["name"] = "no name"
+                                    }
+                                    if(databaseUser["title"].isNullOrEmpty()){
+                                        databaseUser["title"] = "no title"
+                                    }
+                                    if(databaseUser["url"].isNullOrEmpty()){
+                                        databaseUser["url"] = "https://firebasestorage.googleapis.com/v0/b/theatronfinal.appspot.com/o/videos%2FmN8VTp8QxmT1bD5Th9s0b5MahjQ23.mp4?alt=media&token=6d582c9a-4a09-4ad8-8111-528dde677f54"
+                                    }
+                                    if(databaseUser["id"].isNullOrEmpty()){
+                                        //id of marco pilloni, Ios developer
+                                        databaseUser["id"] = "mMr3YSDUlhXXCsyiHIs95L1klMc2"
+                                    }
+                                    if(databaseUser["desc"].isNullOrEmpty()){
+                                        databaseUser["desc"] = "no description"
+                                    }
+                                    if (databaseUser["vnum"].isNullOrEmpty()){
+                                        databaseUser["vnum"] = (vnum+1).toString()
+                                    }
+                                    vnum = databaseUser["vnum"]!!.toInt()
+                                    if(databaseUser["view"].toString().isEmpty()||databaseUser["view"].toString()=="null"){
+                                        databaseUser["view"] = "0"
+                                    }
+                                    if(databaseUser["likes"].toString().isNullOrEmpty()||databaseUser["view"].toString()=="null"){
+                                        databaseUser["likes"] = "0"
+                                    }
+                                    if(databaseUser["dislikes"].toString().isNullOrEmpty()||databaseUser["view"].toString()=="null"){
+                                        databaseUser["dislikes"] = "0"
+                                    }
+                                    if(databaseUser["shares"].toString().isNullOrEmpty()||databaseUser["view"].toString()=="null"){
+                                        databaseUser["shares"] = "0"
+                                    }
+                                    videoList.add(
+                                        ProfileUser(
+                                            databaseUser["name"]!!,
+                                            databaseUser["title"]!!,
+                                            databaseUser["url"]!!,
+                                            databaseUser["thumbnailphoto"]!!,
+                                            databaseUser["id"]!!,
+                                            databaseUser["desc"]!!,
+                                            databaseUser["view"].toString(),
+                                            databaseUser["likes"].toString(),
+                                            databaseUser["dislikes"].toString(),
+                                            databaseUser["shares"].toString(),
+                                            databaseUser["photo"]!!,
+                                            databaseUser["vnum"]!!,
+                                            databaseUser["date"]!!,
+                                            databaseUser["time"]!!
+                                        )
+                                    )
+                                    countOfShares += databaseUser["shares"].toString().toInt()
                                 }
+//                                }catch (e:Exception){
+//                                    e.printStackTrace()
+//                                }
                                 adapter.notifyDataSetChanged()
                             }
                             myRef_user_userId.child("sharescount").setValue(countOfShares)
@@ -153,6 +206,7 @@ class Main2Activity : AppCompatActivity() {
                                     for (mapOfAdmiring in p0.children) {
                                         val databaseUser =
                                             mapOfAdmiring.value as HashMap<String, String>
+
                                         if (databaseUser["id"] != currentUser.uid) {
                                             listADMIRINGTruly.add(databaseUser["id"]!!)
                                         }
@@ -197,6 +251,7 @@ class Main2Activity : AppCompatActivity() {
 
                             override fun onDataChange(p0: DataSnapshot) {
                                 Log.e( "Main 2 Activity", p0.child("admirerscount").value.toString())
+
                                 val admirerscount = p0.child("admirerscount").value as String
                                 myRef_user_userId.child("admirerscount")
                                     .setValue((admirerscount.toInt() - 1).toString())
@@ -264,6 +319,8 @@ class Main2Activity : AppCompatActivity() {
                             }
 
                             override fun onDataChange(p0: DataSnapshot) {
+
+
                                 Log.e( "Main 2 Activity",p0.child("admirerscount").value.toString() )
                                 val admirerscount = p0.child("admirerscount").value as String
                                 myRef_user_userId.child("admirerscount")
@@ -277,6 +334,9 @@ class Main2Activity : AppCompatActivity() {
 
                     val myRef_current_user_userid_admiring = myRef.child("USER").child(currentUser.uid).child("admiring")
                     val keyAdmiring = myRef_current_user_userid_admiring.push().key!!
+                    Log.e("main2activity name", name)
+                    Log.e("main2activity photo", photoUrl)
+                    Log.e("main2activity uid", userId)
                     myRef_current_user_userid_admiring.child(keyAdmiring).setValue(user_with_id(name, photoUrl,userId))
 
                     Toast.makeText(this,"You Started Admiring $name",Toast.LENGTH_SHORT).show()

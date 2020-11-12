@@ -90,6 +90,51 @@ class SearchFragment : Fragment() {
                                                         )
                                                         val databaseUser =
                                                             videoListFetched[i.toString()] as HashMap<String, String>
+
+                                                    if (databaseUser["thumbnailphoto"].isNullOrEmpty()){
+                                                        databaseUser["thumbnailphoto"] = "https://www.pngkit.com/png/full/267-2678423_bacteria-video-thumbnail-default.png"
+                                                    }
+                                                    if (databaseUser["photo"].isNullOrEmpty()){
+                                                        databaseUser["photo"] = "https://www.ibts.org/wp-content/uploads/2017/08/iStock-476085198.jpg"
+                                                    }
+                                                    if(databaseUser["date"].isNullOrEmpty()){
+                                                        databaseUser["date"] = "2020-01-12"
+                                                    }
+                                                    if(databaseUser["time"].isNullOrEmpty()){
+                                                        databaseUser["time"] =  "10:10:55"
+                                                    }
+                                                    if(databaseUser["name"].isNullOrEmpty()){
+                                                        databaseUser["name"] = "no name"
+                                                    }
+                                                    if(databaseUser["title"].isNullOrEmpty()){
+                                                        databaseUser["title"] = "no title"
+                                                    }
+                                                    if(databaseUser["url"].isNullOrEmpty()){
+                                                        databaseUser["url"] = "https://firebasestorage.googleapis.com/v0/b/theatronfinal.appspot.com/o/videos%2FmN8VTp8QxmT1bD5Th9s0b5MahjQ23.mp4?alt=media&token=6d582c9a-4a09-4ad8-8111-528dde677f54"
+                                                    }
+                                                    if(databaseUser["id"].isNullOrEmpty()){
+                                                        //id of marco pilloni, Ios developer
+                                                        databaseUser["id"] = "mMr3YSDUlhXXCsyiHIs95L1klMc2"
+                                                    }
+                                                    if(databaseUser["desc"].isNullOrEmpty()){
+                                                        databaseUser["desc"] = "no description"
+                                                    }
+                                                    if (databaseUser["vnum"].isNullOrEmpty()){
+                                                        databaseUser["vnum"] = (vnum+1).toString()
+                                                    }
+                                                    vnum = databaseUser["vnum"]!!.toInt()
+                                                    if(databaseUser["view"].toString().isEmpty()||databaseUser["view"].toString()=="null"){
+                                                        databaseUser["view"] = "0"
+                                                    }
+                                                    if(databaseUser["likes"].toString().isNullOrEmpty()||databaseUser["view"].toString()=="null"){
+                                                        databaseUser["likes"] = "0"
+                                                    }
+                                                    if(databaseUser["dislikes"].toString().isNullOrEmpty()||databaseUser["view"].toString()=="null"){
+                                                        databaseUser["dislikes"] = "0"
+                                                    }
+                                                    if(databaseUser["shares"].toString().isNullOrEmpty()||databaseUser["view"].toString()=="null"){
+                                                        databaseUser["shares"] = "0"
+                                                    }
                                                         val proUser = ProfileUser(
                                                             databaseUser["name"]!!,
                                                             databaseUser["title"]!!,

@@ -150,41 +150,54 @@ class PlayerViewHolder(itemView: View): RecyclerView.ViewHolder(itemView) {
                     override fun onDataChange(p0: DataSnapshot) {
                         if (p0.exists()) {
 //                            commentsList=ArrayList()
-                          //  try {
-                                for (i in p0.children) {
+                            //  try {
+                            for (i in p0.children) {
 
-                                    val commentUserForData = i.value as HashMap<String, String>
-                                    Log.e(
-                                        "palyere videw holder",
-                                        commentUserForData["id"].toString()
-                                    )
-                                    myRef.child("USER").child(commentUserForData["id"]!!)
-                                        .addListenerForSingleValueEvent(
-                                            object : ValueEventListener {
-                                                override fun onCancelled(error: DatabaseError) {
-                                                }
-
-                                                override fun onDataChange(snapshot: DataSnapshot) {
-                                                    if (snapshot.exists()) {
-                                                        Log.e( "user", snapshot.child("name").value.toString() )
-                                                        Log.e( "user", snapshot.child("photourl").value.toString() )
-                                                        Log.e( "user", commentUserForData["comments"].toString()  )
-                                                        Log.e( "user", commentUserForData["id"].toString() )
-                                                        val userCommentOnce = UserComments(
-                                                            snapshot.child("name").value.toString(),
-                                                            snapshot.child("photourl").value.toString(),
-                                                            commentUserForData["comments"]!!,
-                                                            commentUserForData["id"]!!
-                                                        )
-                                                        if (userCommentOnce !in commentsList) {
-                                                            commentsList.add(0, userCommentOnce)
-                                                        }
-                                                    }
-                                                    adapter.notifyDataSetChanged()
-                                                }
+                                val commentUserForData = i.value as HashMap<String, String>
+                                Log.e(
+                                    "palyere videw holder",
+                                    commentUserForData["id"].toString()
+                                )
+                                myRef.child("USER").child(commentUserForData["id"]!!)
+                                    .addListenerForSingleValueEvent(
+                                        object : ValueEventListener {
+                                            override fun onCancelled(error: DatabaseError) {
                                             }
-                                        )
-                                }
+
+                                            override fun onDataChange(snapshot: DataSnapshot) {
+                                                if (snapshot.exists()) {
+                                                    Log.e("snapshot player view h", snapshot.toString())
+                                                    Log.e(
+                                                        "user",
+                                                        snapshot.child("name").value.toString()
+                                                    )
+                                                    Log.e(
+                                                        "user",
+                                                        snapshot.child("photourl").value.toString()
+                                                    )
+                                                    Log.e(
+                                                        "user",
+                                                        commentUserForData["comments"].toString()
+                                                    )
+                                                    Log.e(
+                                                        "user",
+                                                        commentUserForData["id"].toString()
+                                                    )
+                                                    val userCommentOnce = UserComments(
+                                                        snapshot.child("name").value.toString(),
+                                                        snapshot.child("photourl").value.toString(),
+                                                        commentUserForData["comments"]!!,
+                                                        commentUserForData["id"]!!
+                                                    )
+                                                    if (userCommentOnce !in commentsList) {
+                                                        commentsList.add(0, userCommentOnce)
+                                                    }
+                                                }
+                                                adapter.notifyDataSetChanged()
+                                            }
+                                        }
+                                    )
+                            }
 //                            } catch (e: Exception) {
 //                                e.printStackTrace()
 //                            }
